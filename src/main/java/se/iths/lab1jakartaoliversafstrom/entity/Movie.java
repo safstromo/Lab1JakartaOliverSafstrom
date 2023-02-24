@@ -4,12 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-public class Movies {
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +18,6 @@ public class Movies {
     @Size(min = 2)
     private String name;
     @NotNull
-    @Size(min = 4)
     private Integer year;
 
 
@@ -45,5 +43,13 @@ public class Movies {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Movie(String name, Integer year) {
+        this.name = name;
+        this.year = year;
+    }
+
+    public Movie() {
     }
 }

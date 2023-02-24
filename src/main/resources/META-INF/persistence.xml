@@ -5,7 +5,7 @@
              version="3.0">
     <persistence-unit name="default">
         <jta-data-source>java:/MySqlDS</jta-data-source>
-        <class>se.iths.lab1jakartaoliversafstrom.entity.Movies</class>
+        <class>se.iths.lab1jakartaoliversafstrom.entity.Movie</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
