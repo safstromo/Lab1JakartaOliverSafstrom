@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 import se.iths.lab1jakartaoliversafstrom.entity.Movie;
 
 import java.util.List;
@@ -17,24 +18,32 @@ public class MovieRepository {
     EntityManager entityManager;
 
 
-
-    public Optional<Movie> findOne(Long id){
+    public Optional<Movie> findOne(Long id) {
         return Optional.ofNullable(entityManager.find(Movie.class, id));
     }
 
 
-
-    public List<Movie> findAll(){
+    public List<Movie> findAll() {
         var query = entityManager.createQuery("select m from Movie m");
         return query.getResultList();
 
     }
 
-    public void add(Movie movie){
+    public List<Movie> findByName(String name) {
+        var query = entityManager.createQuery("select m from Movie m where m.name like :name");
+        query.setParameter("name", name);
+        return query.getResultList();
+    }
+
+    public void add(Movie movie) {
         entityManager.persist(movie);
     }
 
-    public void delete(){}
+    public void delete(Long id) {
+        var movie = findOne(id);
+        movie.ifPresent((m) -> entityManager.remove(m));
+    }
 
-    public void update(){}
+    public void update() {
+    }
 }

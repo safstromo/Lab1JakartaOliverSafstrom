@@ -19,8 +19,10 @@ public class MovieController {
     MovieRepository repository;
 
     @GET
-    public List<Movie> getAll() {
-        return repository.findAll();
+    public List<Movie> getAll(@QueryParam("name") String name) {
+        if (name == null)
+            return repository.findAll();
+        return repository.findByName(name);
     }
 
     @GET
@@ -32,10 +34,16 @@ public class MovieController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response add(@Valid Movie movie){
+    public Response add(@Valid Movie movie) {
         repository.add(movie);
         return Response.created(URI.create("/movies/" + movie.getId())).build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        repository.delete(id);
+        return Response.ok().build();
+    }
 }
 
