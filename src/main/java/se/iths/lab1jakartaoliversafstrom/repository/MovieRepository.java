@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import se.iths.lab1jakartaoliversafstrom.entity.Movie;
 
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 @Transactional
@@ -17,7 +18,9 @@ public class MovieRepository {
 
 
 
-    public void findOne(){}
+    public Optional<Movie> findOne(Long id){
+        return Optional.ofNullable(entityManager.find(Movie.class, id));
+    }
 
 
 
