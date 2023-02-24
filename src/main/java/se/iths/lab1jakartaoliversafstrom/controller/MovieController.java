@@ -53,9 +53,20 @@ public class MovieController {
     @PATCH
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateName(@PathParam("id")Long id, MovieDto movieDto) {
+    public Response updateName(@PathParam("id") Long id, MovieDto movieDto) {
         repository.update(movieDto.getName(), id);
         return Response.ok().build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response replace(@PathParam("id") Long id, @Valid Movie movie) {
+        if (repository.findOne(id).isPresent()) {
+            repository.replace(movie, id);
+            return Response.created(URI.create("/movies/" + id)).build();
+        }
+        return Response.noContent().build();
     }
 }
 

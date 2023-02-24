@@ -4,7 +4,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import se.iths.lab1jakartaoliversafstrom.entity.Movie;
 
 import java.util.List;
@@ -43,7 +42,15 @@ public class MovieRepository {
         findOne(id).ifPresent((movie) -> entityManager.remove(movie));
     }
 
-    public void update(String newName, Long id){
-       findOne(id).ifPresent((movie)-> movie.setName(newName));
+    public void update(String newName, Long id) {
+        findOne(id).ifPresent((movie) -> movie.setName(newName));
+    }
+
+    public void replace(Movie updated, Long id) {
+        findOne(id).ifPresent((movie) -> {
+            movie.setName(updated.getName());
+            movie.setYear(updated.getYear());
+        });
+
     }
 }
