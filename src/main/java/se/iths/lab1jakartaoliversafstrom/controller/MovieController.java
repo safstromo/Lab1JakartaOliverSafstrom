@@ -6,6 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.iths.lab1jakartaoliversafstrom.dto.Mapper;
+import se.iths.lab1jakartaoliversafstrom.dto.MovieDto;
 import se.iths.lab1jakartaoliversafstrom.entity.Movie;
 import se.iths.lab1jakartaoliversafstrom.repository.MovieRepository;
 
@@ -22,10 +23,10 @@ public class MovieController {
     Mapper mapper;
 
     @GET
-    public List<Movie> getAll(@QueryParam("name") String name) {
+    public List<MovieDto> getAll(@QueryParam("name") String name) {
         if (name == null)
-            return repository.findAll();
-        return repository.findByName(name);
+            return mapper.mapMovieToDto(repository.findAll());
+        return mapper.mapMovieToDto(repository.findByName(name));
     }
 
     @GET
@@ -52,8 +53,9 @@ public class MovieController {
     @PATCH
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateName(@PathParam("id") Long id, @FormParam("name") String newName) {
-        repository.update(newName, id);
+    public Response updateName(@PathParam("id")Long id, MovieDto movieDto) {
+        repository.update(movieDto.getName(), id);
+        return Response.ok().build();
     }
 }
 

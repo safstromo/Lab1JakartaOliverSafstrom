@@ -1,5 +1,7 @@
 package se.iths.lab1jakartaoliversafstrom.dto;
 
+import se.iths.lab1jakartaoliversafstrom.entity.Movie;
+
 public class MovieDto {
 
     private int year;
@@ -8,6 +10,10 @@ public class MovieDto {
     public MovieDto(int year, String name) {
         this.year = year;
         Name = name;
+    }
+    public MovieDto(Movie movie){
+        this.Name = movie.getName();
+        this.year = movie.getYear();
     }
 
     public MovieDto() {
