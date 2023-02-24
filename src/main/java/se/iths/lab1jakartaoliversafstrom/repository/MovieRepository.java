@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import se.iths.lab1jakartaoliversafstrom.entity.Movie;
 
 import java.util.List;
@@ -29,8 +30,8 @@ public class MovieRepository {
     }
 
     public List<Movie> findByName(String name) {
-        var query = entityManager.createQuery("select m from Movie m where m.name like :name");
-        query.setParameter("name", name);
+        var query = entityManager.createQuery("select m from Movie m where name like :name");
+        query.setParameter("name", name + "%");
         return query.getResultList();
     }
 

@@ -2,8 +2,10 @@ package se.iths.lab1jakartaoliversafstrom.dto;
 
 import se.iths.lab1jakartaoliversafstrom.entity.Movie;
 
-public class MovieDto {
+import java.util.function.Consumer;
 
+public class MovieDto {
+    private Long id;
     private int year;
     private String Name;
 
@@ -11,9 +13,11 @@ public class MovieDto {
         this.year = year;
         Name = name;
     }
-    public MovieDto(Movie movie){
+
+    public MovieDto(Movie movie) {
         this.Name = movie.getName();
         this.year = movie.getYear();
+        this.id = movie.getId();
     }
 
     public MovieDto() {

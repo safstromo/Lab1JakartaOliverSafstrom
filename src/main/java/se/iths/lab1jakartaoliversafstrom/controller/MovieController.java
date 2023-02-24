@@ -31,8 +31,8 @@ public class MovieController {
 
     @GET
     @Path("/{id}")
-    public Optional<Movie> getOne(@PathParam("id") Long id) {
-        return repository.findOne(id);
+    public Optional<MovieDto> getOne(@PathParam("id") Long id) {
+        return mapper.mapMovieToDto(repository.findOne(id));
 
     }
 
