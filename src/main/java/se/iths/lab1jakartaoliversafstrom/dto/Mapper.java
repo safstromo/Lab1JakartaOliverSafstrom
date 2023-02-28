@@ -10,11 +10,11 @@ import java.util.Optional;
 public class Mapper {
 
 
-    public List<MovieDto> mapMovieToDto(List<Movie> movie){
+    public List<MovieDto> mapMovieToDto(List<Movie> movie) {
         return movie.stream().map(MovieDto::new).toList();
     }
 
-    public Optional<MovieDto> mapMovieToDto(Optional<Movie> movie){
+    public Optional<MovieDto> mapMovieToDto(Optional<Movie> movie) {
         return Optional.of(new MovieDto(movie.get()));
 
     }

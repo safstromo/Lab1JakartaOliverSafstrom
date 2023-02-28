@@ -2,8 +2,6 @@ package se.iths.lab1jakartaoliversafstrom.dto;
 
 import se.iths.lab1jakartaoliversafstrom.entity.Movie;
 
-import java.util.function.Consumer;
-
 public class MovieDto {
     private Long id;
     private int year;
