@@ -45,6 +45,15 @@ public class Movie {
         this.year = year;
     }
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                '}';
+    }
+
     public Movie(String name, Integer year) {
         this.name = name;
         this.year = year;

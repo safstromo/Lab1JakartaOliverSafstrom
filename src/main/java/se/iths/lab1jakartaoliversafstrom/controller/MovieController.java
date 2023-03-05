@@ -12,7 +12,6 @@ import se.iths.lab1jakartaoliversafstrom.repository.MovieRepository;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @Path("/movies")
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,9 +30,11 @@ public class MovieController {
 
     @GET
     @Path("/{id}")
-    public Optional<MovieDto> getOne(@PathParam("id") Long id) {
-        return mapper.mapMovieToDto(repository.findOne(id));
-
+    public Response getOne(@PathParam("id") Long id) {
+        var movie = repository.findOne(id);
+        if (movie.isPresent())
+            return Response.ok().entity(mapper.mapMovieToDto(movie).get()).build();
+        return Response.noContent().build();
     }
 
     @POST
